@@ -26,8 +26,12 @@ class BankAccountTest {
     void isEmailValidTest(){
         assertTrue(BankAccount.isEmailValid( "a@b.com"));   // valid email address
         assertFalse( BankAccount.isEmailValid(""));         // empty string
-
-        
+        assertFalse( BankAccount.isEmailValid("tjones@binary@yahoo.com"));         //2 @s    
+        assertFalse( BankAccount.isEmailValid("t@jones@rock"));     //2 @s and incomplete suffix
+        assertFalse( BankAccount.isEmailValid("@mansion"));         // No prefix, incomplete suffix 
+        assertFalse( BankAccount.isEmailValid("@yahoo.com"));         //No prefix
+  
+ 
     }
 
     @Test
