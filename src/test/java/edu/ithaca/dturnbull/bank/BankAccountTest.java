@@ -29,6 +29,7 @@ class BankAccountTest {
         assertFalse(BankAccount.isEmailValid("@.com"));     //no prefix incomplete suffix -> Boundary value: At least one character in prefix
         assertFalse( BankAccount.isEmailValid("ab@c@d@.com"));  //mulitple @ symbols -> Equivalence: invalid characters in prefix
         assertFalse( BankAccount.isEmailValid(".com@"));    //incorrectly formatted suffix -> Equivalence: invalid characters in prefix
+        assertFalse(BankAccount.isEmailValid("abc@gmail.v")); // valid prefix invalid suffix
 
         //Potential missing tests
         //Valid prefix, invalid suffix
