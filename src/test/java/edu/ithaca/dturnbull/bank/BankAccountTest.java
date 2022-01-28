@@ -33,6 +33,10 @@ class BankAccountTest {
         assertTrue(BankAccount.isEmailValid("ab@gmail.com")); //prefix with only two letters
         assertTrue(BankAccount.isEmailValid("wizard.ofoz@ithaca.edu")); //prefix with period
         assertFalse( BankAccount.isEmailValid("chris@to.pher.com"));  //additional period in suffix
+        assertFalse( BankAccount.isEmailValid("rumplestiltskin.com")); //no @ symbol
+        assertFalse( BankAccount.isEmailValid("pinocchio@gmail.com$")); //invalid suffix
+        assertFalse( BankAccount.isEmailValid("captain.@hook.com")); //period with no character after
+        assertFalse( BankAccount.isEmailValid("jiminy_@cricket.com"));//underscore with no character after
         //Potential missing tests
         //Valid prefix, invalid suffix
     }
