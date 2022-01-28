@@ -19,6 +19,20 @@ class BankAccountTest {
         bankAccount.withdraw(100);
 
         assertEquals(100, bankAccount.getBalance(), 0.001);
+
+        //Testing the maximum you can withdraw from the bank
+        bankAccount.withdraw(100);
+        assertEquals(0, bankAccount.getBalance(), 0.001);
+
+        //Testing the minimum you can withdraw
+        bankAccount.withdraw(0);
+        assertEquals(0, bankAccount.getBalance(), 0.001);
+
+        //Testing what happens when you withdraw a negative amount(deposit)
+        bankAccount.withdraw(-1);
+        assertEquals(1, bankAccount.getBalance(), 0.001);
+
+
         assertThrows(InsufficientFundsException.class, () -> bankAccount.withdraw(300));
     }
 
