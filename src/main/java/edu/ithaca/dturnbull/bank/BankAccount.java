@@ -105,8 +105,20 @@ public class BankAccount {
      * @throws InsufficientFundsException
      * @throws IllegalArgumentException
      */
-    public static void transfer(BankAccount sender, BankAccount receiver, double amount){
-        
+    public static void transfer(BankAccount sender, BankAccount receiver, double amount) throws InsufficientFundsException{
+        //check if accounts are the same
+        if(sender == receiver){
+            throw new IllegalArgumentException("Account cannot transfer to itself!");
+        }
+
+        if(isAmountValid(amount)){
+            sender.withdraw(amount);
+            receiver.deposit(amount);
+        }
+        else{
+            throw new IllegalArgumentException("Invalid Transfer Amount");
+        }
+
     }
 
     public static boolean isEmailValid(String email){
