@@ -39,6 +39,49 @@ class BankAccountTest {
     }
 
     @Test
+    void transferTest(){
+        BankAccount bankAccount1 = new BankAccount("a@b.com", 500);
+        BankAccount bankAccount2 = new BankAccount("b@a.com", 0);
+
+        //Valid non-negative amount and valid sender and receiver
+        BankAccount.transfer(bankAccount1, bankAccount2, 250);
+        assertEquals(250, bankAccount1.getBalance(), .001);
+        assertEquals(250, bankAccount2.getBalance(), .001);
+
+        BankAccount.transfer(bankAccount1, bankAccount2, 0);
+        assertEquals(250, bankAccount1.getBalance(), .001); //Border
+        assertEquals(250, bankAccount2.getBalance(), .001); //Border
+
+        BankAccount.transfer(bankAccount1, bankAccount2, 250);
+        assertEquals(0, bankAccount1.getBalance(), .001); //Border
+        assertEquals(500, bankAccount2.getBalance(), .001); //Border
+
+        BankAccount.transfer(bankAccount2, bankAccount1, 499.99);
+        assertEquals(499.99, bankAccount1.getBalance(), .001); //Border
+        assertEquals(0.01, bankAccount2.getBalance(), .001); //Border
+
+        
+
+        //Sender doesn't have enough
+        assertThrows(InsufficientFundsException.class,() -> BankAccount.transfer(bankAccount1, bankAccount2, 1000));
+        assertThrows(InsufficientFundsException.class,() -> BankAccount.transfer(bankAccount1, bankAccount2, 500));//Border
+
+        //Receiver and Sender are the same
+        assertThrows(IllegalArgumentException.class,() -> BankAccount.transfer(bankAccount1, bankAccount1, 0));
+
+        //Invalid amount
+        //Negative amount
+        assertThrows(IllegalArgumentException.class,() -> BankAccount.transfer(bankAccount1, bankAccount2, -200));
+        assertThrows(IllegalArgumentException.class,() -> BankAccount.transfer(bankAccount1, bankAccount2, -0.01)); //border
+
+        //More than 2 decimal places
+        assertThrows(IllegalArgumentException.class,() -> BankAccount.transfer(bankAccount1, bankAccount2, 212.34876));
+        assertThrows(IllegalArgumentException.class,() -> BankAccount.transfer(bankAccount1, bankAccount1, 3.141)); //border
+
+
+    }
+
+    @Test
     void isAmountValidTest(){
         //Positive valid amount
         assertTrue(BankAccount.isAmountValid(100));

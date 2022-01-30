@@ -97,6 +97,18 @@ public class BankAccount {
     }
 
 
+    /**
+     * Transfers amount from sender to receiver
+     * @param sender
+     * @param receiver
+     * @param amount
+     * @throws InsufficientFundsException
+     * @throws IllegalArgumentException
+     */
+    public static void transfer(BankAccount sender, BankAccount receiver, double amount){
+        
+    }
+
     public static boolean isEmailValid(String email){
         
         if(email.length() <= 0)
