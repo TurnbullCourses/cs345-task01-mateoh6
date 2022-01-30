@@ -61,6 +61,26 @@ class BankAccountTest {
     }
 
     @Test
+    void depositTest(){
+        BankAccount bankAccount = new BankAccount("a@b.com", 0);
+
+        //valid positive amount
+        bankAccount.deposit(100); 
+        assertEquals(100, bankAccount.getBalance(), .001);
+
+        bankAccount.deposit(0.01);
+        assertEquals(100.01, bankAccount.getBalance(), .001); //border
+
+        //Negative amount
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(-100));
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(-0.01)); //border
+
+        //Amount with more than 2 decimals
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(100.23467435));
+        assertThrows(IllegalArgumentException.class, () -> bankAccount.deposit(100.234));//border
+    }
+
+    @Test
     void withdrawTest() throws InsufficientFundsException{
         BankAccount bankAccount = new BankAccount("a@b.com", 200);
         bankAccount.withdraw(100);

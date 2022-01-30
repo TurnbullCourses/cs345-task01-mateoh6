@@ -65,6 +65,8 @@ public class BankAccount {
 
     /**
      * @post reduces the balance by amount if amount is non-negative and smaller than balance
+     * @throws InsuffientFundsException
+     * @throws IllegalArgumentException
      */
     public void withdraw (double amount) throws InsufficientFundsException{
         if(isAmountValid(amount)){
@@ -80,6 +82,14 @@ public class BankAccount {
         }        
     }
 
+    /**
+     * Deposits a valid amount in the account and adds to balance
+     * @param amount
+     */
+    public void deposit(double amount){
+        
+    }
+
 
     public static boolean isEmailValid(String email){
         
@@ -88,13 +98,13 @@ public class BankAccount {
 
         //If first character is not a letter or number
         if(email.charAt(0) < 'A' || email.charAt(0) > 'z'){
-            //return false;
+            return false;
         }
         else if(email.charAt(0) > 'Z' && email.charAt(0) < 'a'){
-            //return false;
+            return false;
         }
         else if(email.charAt(0) > '9' && email.charAt(0) < '0'){
-            //return false;
+            return false;
         }
         
         
