@@ -33,7 +33,28 @@ public class BankAccount {
      * @param amount
      */
     public static boolean isAmountValid(double amount){
-        return false;
+        //negative amounts
+        if(amount < 0){
+            return false;
+        }
+
+        //more than two decimals
+        int digits;
+        double testAmount = amount;
+
+        //move left 2 decimals
+        testAmount *= 100;
+
+        //cut off the rest of the digits
+        digits = (int) testAmount;
+        testAmount = digits;
+        testAmount /= 100;
+
+        if(testAmount != amount){
+            return false;
+        }
+
+        return true;
     }
 
     /**
