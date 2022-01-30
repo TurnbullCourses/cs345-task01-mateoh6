@@ -45,6 +45,31 @@ class BankAccountTest {
     }
 
     @Test
+    void isAmountValidTest(){
+        //Positive valid amount
+        assertTrue(BankAccount.isAmountValid(100));
+        assertTrue(BankAccount.isAmountValid(0.01)); //Border
+        assertTrue(BankAccount.isAmountValid(10.1)); //Only 1 Decimal place
+
+
+        //Negative amount
+        assertFalse(BankAccount.isAmountValid(-100));
+        assertFalse(BankAccount.isAmountValid(-0.01)); //Border
+
+        //Zero amount
+        assertTrue(BankAccount.isAmountValid(0));
+        assertTrue(BankAccount.isAmountValid(0.00));
+
+        //More than two decimal places
+        assertFalse(BankAccount.isAmountValid(10.012)); //border
+        assertFalse(BankAccount.isAmountValid(10.002453245));
+        assertTrue(BankAccount.isAmountValid(10.010)); 
+
+
+
+    }
+
+    @Test
     void withdrawTest() throws InsufficientFundsException{
         BankAccount bankAccount = new BankAccount("a@b.com", 200);
         bankAccount.withdraw(100);
